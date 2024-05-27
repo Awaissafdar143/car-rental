@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('car_name');
             $table->Integer('car_review')->default(5);
             $table->foreignId('car_type');
+            $table->foreignId('vehicle_type');
             $table->string('car_image');
             $table->Integer('car_passenger');
             $table->Integer('car_gate')->nullable();

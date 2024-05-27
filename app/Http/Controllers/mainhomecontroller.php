@@ -8,7 +8,6 @@ use App\models\brand;
 use App\models\vehicle;
 use App\Models\favorite;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,11 +29,11 @@ class mainhomecontroller extends Controller
         })->get();
 
         if ($request->ajax()) {
-            if($request->filled('category') || $request->filled('range_min') ||$request->filled('range_max') )
-           { $output = ''; {
-                foreach ($cars as $car) {
-                    $output .=
-                        '
+            if ($request->filled('category') || $request->filled('range_min') || $request->filled('range_max')) {
+                $output = ''; {
+                    foreach ($cars as $car) {
+                        $output .=
+                            '
                         <div class="col-xl-4 col-lg-6">
                         <div class="de-item mb30">
                                 <div class="d-img">
@@ -48,7 +47,7 @@ class mainhomecontroller extends Controller
                                             <h3> ' . $car->car_name . '</h3>
                                         </a>
                                         <div class="d-item_like">
-                                        <a href="javascript:void(0);" onclick="addtofavourite({{'. $car->id .'}})"><i
+                                        <a href="javascript:void(0);" onclick="addtofavourite({{' . $car->id . '}})"><i
 
                                         class="fa fa-heart"></i> </a> <span>' . $car->car_review . ' </span>
                                         </div>
@@ -72,17 +71,16 @@ class mainhomecontroller extends Controller
                             </div>
                             </div>
                         ';
-                }
+                    }
 
-                return response()->json($output);
+                    return response()->json($output);
+                }
+            } else {
+                $favourite = new favorite;
+                $favourite->car_id = $request->car_id;
+                $favourite->user_id = Auth::user()->id;
+                $favourite->save();
             }
-        }
-        else{
-            $favourite= new favorite;
-            $favourite->car_id=$request->car_id;
-            $favourite->user_id=Auth::user()->id;
-            $favourite->save();
-        }
 
 
         } else {
@@ -109,7 +107,7 @@ class mainhomecontroller extends Controller
         $blogs = blog::where('slug', $slug)->get();
         $datas = blog::orderBy('created_at')->get();
         // dd($blogs);
-        return view('blog-single', compact('blogs','datas'));
+        return view('blog-single', compact('blogs', 'datas'));
     }
     function single_car_show($slug)
     {
@@ -121,17 +119,17 @@ class mainhomecontroller extends Controller
     function dashboard()
     {
         $id = auth()->user()->id;
-        $favourites=favorite::where('user_id',$id)->get();
+        $favourites = favorite::where('user_id', $id)->get();
         // $users=DB::table('users')->where('id',$id)->get();
         $users = user::where('id', $id)->get();
-        return view('account-dashboard', compact('favourites','users'));
+        return view('account-dashboard', compact('favourites', 'users'));
     }
     function account_favorite()
     {
         $id = auth()->user()->id;
-        $favourites=favorite::where('user_id',$id)->get();
+        $favourites = favorite::where('user_id', $id)->get();
         $users = user::where('id', $id)->get();
-        return view('account-favorite', compact('favourites','users'));
+        return view('account-favorite', compact('favourites', 'users'));
     }
     function singleuser_dashboard()
     {

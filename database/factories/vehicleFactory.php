@@ -20,6 +20,7 @@ class vehicleFactory extends Factory
             "car_name"=>fake()->name(),
             "car_review"=>fake()->numberBetween(2,5),
             "car_type"=>fake()->numberBetween(1,7),
+            "vehicle_type"=>fake()->numberBetween(1,4),
             "car_image"=>fake()->numberBetween(1,12),
             "car_passenger"=>fake()->numberBetween(3,52),
             "car_gate"=>fake()->numberBetween(1,5),

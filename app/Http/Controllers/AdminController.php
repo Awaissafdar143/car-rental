@@ -54,7 +54,7 @@ public function blog_delete($id){
     $datas=$stud->get();
     return view('backend.blog.update',compact('datas'));
 }
-public function blog_update_post(request $request){
+public function blog_update_post(request $request,$id){
        $blog= blog::find($id);
        if($request->has('image')){
         $path= "";
