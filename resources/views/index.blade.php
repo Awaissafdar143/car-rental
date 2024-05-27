@@ -141,17 +141,13 @@
                                             $car->car_gate }}</span>
                                         <span class="d-atr"><img src="{{asset('images/icons/3-green.svg')}}" alt="">{{
                                             $car->car_passenger }}</span>
-                                        <span class="d-atr"><img src="{{asset('images/icons/4-green.svg')}}" alt="">{{
-                                            $car->car_type }}</span>
-                                        {{-- <span class="d-atr"><img src="{{asset('images/icons/2-green.svg"
-                                                alt="">2</span>
-                                        --}}
-
+                                        <span class="d-atr"><img src="{{asset('images/icons/4-green.svg')}}"
+                                                alt="">{{$car->car_type }}</span>
                                         <span class="d-atr">{{ $car->brand_name }}</span>
                                     </div>
                                     <div class="d-price">
                                         Daily rate from <span>${{ $car->car_rent }}</span>
-                                        <a class="btn-main" href="{{ route('singlecar', $car->id) }}">Rent
+                                        <a class="btn-main" href="{{ route('singlecar',$car->id) }}">Rent
                                             Now</a>
                                     </div>
                                 </div>

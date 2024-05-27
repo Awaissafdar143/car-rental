@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\emailjob;
 use App\Models\email_template;
-use App\Models\emailmarkeing;
+use App\Models\emailaddresses;
 use Illuminate\Http\Request;
 
 
@@ -13,7 +13,7 @@ class EmailmarkeingController extends Controller
     public function dashboard()
     {
         $templates = email_template::all();
-        $emails = emailmarkeing::paginate(15);
+        $emails = emailaddresses::paginate(15);
         return view('backend.emailmarketing.dashboard', compact('templates', 'emails'));
     }
     public function template_add(request $request)
@@ -36,8 +36,8 @@ class EmailmarkeingController extends Controller
     }
     public function all_email()
     {
-        // $emails = emailmarkeing::all();
-        $emails = emailmarkeing::paginate(20);
+        // $emails = emailaddresses::all();
+        $emails = emailaddresses::paginate(20);
         return view('backend.emailmarketing.allemail', compact('emails'));
     }
     public function template_update($id)
@@ -70,7 +70,7 @@ class EmailmarkeingController extends Controller
         $emailArray = explode(',', $emails);
         foreach ($emailArray as $email) {
             $trimmedEmail = trim($email);
-            emailmarkeing::create([
+            emailaddresses::create([
                 'email' => $trimmedEmail
             ]);
         }
@@ -78,7 +78,7 @@ class EmailmarkeingController extends Controller
     }
     public function send_now($template)
     {
-        $emaildatas = emailmarkeing::all();
+        $emaildatas = emailaddresses::all();
         $subjectData = email_template::find($template);
         foreach ($emaildatas as $emaildata) {
             // dispatch(new emailjob($emaildata, $template, $subjectData))->delay(now()->addSeconds(20));
@@ -88,7 +88,7 @@ class EmailmarkeingController extends Controller
     }
     public function email_delete()
     {
-        $data =emailmarkeing::delete();
+        $data = emailaddresses::delete();
         // $data->delete();
         return redirect()->back()->with('message', 'All Emails are deleted');
     }

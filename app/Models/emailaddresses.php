@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class emailmarkeing extends Model
+class emailaddresses extends Model
 {
     use HasFactory;
     protected $guarded=[];
