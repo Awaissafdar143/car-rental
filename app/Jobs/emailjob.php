@@ -33,6 +33,7 @@ class emailjob implements ShouldQueue
     {
         $templateData = email_template::find($this->templateid);
         // dd($templateData);
-        Mail::to($this->emaildata['email'])->send(new markwtingmail($templateData, $this->emaildata['name'], $this->subjectData));
+        // Mail::to($this->emaildata['email'])->send(new markwtingmail($templateData, $this->emaildata['name'], $this->subjectData));
+       Mail::to($this->emaildata['email'])->queue(new markwtingmail($templateData, $this->emaildata['name'], $this->subjectData));
     }
 }
