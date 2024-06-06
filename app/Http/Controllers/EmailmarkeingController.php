@@ -78,12 +78,6 @@ class EmailmarkeingController extends Controller
     }
     public function send_now($template)
     {
-        $emaildatas = emailaddresses::all();
-        $subjectData = email_template::find($template);
-        foreach ($emaildatas as $emaildata) {
-            dispatch(new emailjob($emaildata, $template, $subjectData))->delay(now()->addSeconds(20));
-            // emailjob::dispatch($emaildata, $template, $subjectData);
-        }
         return redirect()->back();
     }
     public function email_delete()
