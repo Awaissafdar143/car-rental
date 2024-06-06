@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Mail\marketinggmail;
+use App\Mail\markwtingmail;
 use App\Models\email_template;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Mail;
@@ -33,7 +33,7 @@ class emailjob implements ShouldQueue
     {
         $templateData = email_template::find($this->templateid);
         // dd($templateData);
-        // Mail::to($this->emaildata['email'])->send(new marketinggmail($templateData, $this->emaildata['name'], $this->subjectData));
-       Mail::to($this->emaildata['email'])->queue(new marketinggmail($templateData, $this->emaildata['name'], $this->subjectData));
+        // Mail::to($this->emaildata['email'])->send(new markwtingmail($templateData, $this->emaildata['name'], $this->subjectData));
+       Mail::to($this->emaildata['email'])->queue(new markwtingmail($templateData, $this->emaildata['name'], $this->subjectData));
     }
 }
