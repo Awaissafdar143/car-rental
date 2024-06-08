@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\emailjob;
+use Illuminate\Http\Request;
 use App\Models\email_template;
 use App\Models\emailaddresses;
-use Illuminate\Http\Request;
+use App\Jobs\emailmarketingJob;
 
 
 class EmailmarkeingController extends Controller
@@ -78,6 +78,11 @@ class EmailmarkeingController extends Controller
     }
     public function send_now($template)
     {
+        $emaildatas = emailaddresses::all();
+        $subjectData = email_template::find($template);
+        foreach ($emaildatas as $emaildata) {
+            dispatch(new emailmarketingJob($emaildata, $template, $subjectData))->delay(now()->addSeconds(20));
+        }
         return redirect()->back();
     }
     public function email_delete()
