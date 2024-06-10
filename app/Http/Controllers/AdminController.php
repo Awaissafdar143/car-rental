@@ -42,9 +42,6 @@ public function add_blog_show(){
     return view('backend.blog.addblog');
 }
 public function blog_delete($id){
-    // $student = new blog;
-    // $stud=$student->where('id',$id);
-    // $stud->delete();
     $data=blog::where('id',$id)->delete();
     return redirect()->back();
    }
