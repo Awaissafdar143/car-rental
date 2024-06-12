@@ -305,8 +305,6 @@
                             'range_max': range_max
                         },
                         success: function(data) {
-
-
                             $('#cards').html(data);
                         }
                     })
