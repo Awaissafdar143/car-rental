@@ -10,7 +10,6 @@ class BookingController extends Controller
 {
     function search(request $request)
     {
-
         $types = vehicle_type::get();
         $cars = vehicle::when($request->filled('category'), function ($query) use ($request) {
             $query->where('car_type', $request->category);
