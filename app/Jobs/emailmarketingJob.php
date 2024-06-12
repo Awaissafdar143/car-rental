@@ -32,11 +32,8 @@ class emailmarketingJob implements ShouldQueue
     public function handle(): void
     {
         $templateData = email_template::find($this->templateid);
-<<<<<<< Updated upstream:app/Jobs/emailmarketingJob.php
         // dd($this->user_name);
         Mail::to($this->emaildata['email'])->send(new emailmarketingmail($templateData, $this->emaildata['name'], $this->subjectData));
-=======
-       Mail::to($this->emaildata['email'])->queue(new markwtingmail($templateData, $this->emaildata['name'], $this->subjectData));
->>>>>>> Stashed changes:app/Jobs/emailjob.php
+
     }
 }
