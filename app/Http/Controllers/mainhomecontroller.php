@@ -120,7 +120,6 @@ class mainhomecontroller extends Controller
     {
         $id = auth()->user()->id;
         $favourites = favorite::where('user_id', $id)->get();
-        // $users=DB::table('users')->where('id',$id)->get();
         $users = user::where('id', $id)->get();
         return view('account-dashboard', compact('favourites', 'users'));
     }
