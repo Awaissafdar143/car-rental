@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\EmailmarkeingController;
-use App\Http\Controllers\admincarcontroller;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\googleController;
-use App\Http\Controllers\mainhomecontroller;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\googleController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\admincarcontroller;
+use App\Http\Controllers\mainhomecontroller;
+use App\Http\Controllers\EmailmarkeingController;
 
 
 
@@ -91,22 +92,10 @@ Route::fallback(function () {
     return view('404');
 });
 
-
-
-
-
-
-
-// Route::get('/login', function () {
-//     return view('auth.login');
-// })->name('login');
-// Route::get('/register', function () {
-//     return view('auth.register');
-// })->name('register');
-
-
-
-
+Route::controller(BookingController::class)->group(function () {
+    Route::get('/booking-dashboard', 'booking')->name('booking-dashboard');
+    Route::post('/booking-done', 'bookingdone')->name('booking-done');
+});
 // login with google
 Route::get('auth/google', [googleController::class, 'loginWithGoogle'])->name('loginwithgoogle');
 
